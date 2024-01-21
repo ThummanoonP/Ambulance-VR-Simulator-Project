@@ -1,0 +1,9 @@
+{
+  "Name": "Empty",
+  "Description": "An empty scenario.",
+  "EngineStateFile":"Soldier@0s.pbb",
+  "DataRequestManager": {
+    "DataRequest": [ ]
+  },
+  "AnyAction": [ ]
+}

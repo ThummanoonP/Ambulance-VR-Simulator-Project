@@ -1,0 +1,240 @@
+{
+  "Name": "CombatMultitrauma",
+  "Description": "Showcase scenario: Soldier with closed tension pneumothorax and severe bleeding.",
+  "EngineStateFile":"Soldier@0s.pbb",
+  "DataRequestManager": {
+    "DataRequest": 
+    [
+      { "DecimalFormat": { "Precision": 1 }, "Category": "Physiology", "PropertyName": "HeartStrokeVolume",                 "Unit": "mL" },
+      { "DecimalFormat": { "Precision": 2 }, "Category": "Physiology", "PropertyName": "BloodVolume",                       "Unit": "L" },
+      { "DecimalFormat": { "Precision": 1 }, "Category": "Physiology", "PropertyName": "ExtravascularFluidVolume",          "Unit": "L" },
+      { "DecimalFormat": { "Precision": 2 }, "Category": "Physiology", "PropertyName": "CardiacOutput",                     "Unit": "L/min" },
+      { "DecimalFormat": {                }, "Category": "Physiology", "PropertyName": "HemoglobinContent",                 "Unit": "g" },
+      { "DecimalFormat": { "Precision": 2 }, "Category": "Physiology", "PropertyName": "CentralVenousPressure",             "Unit": "mmHg" },
+      { "DecimalFormat": { "Precision": 2 }, "Category": "Physiology", "PropertyName": "PulmonaryCapillariesWedgePressure", "Unit": "mmHg" },
+      { "DecimalFormat": { "Precision": 3 }, "Category": "Physiology", "PropertyName": "TidalVolume",                       "Unit": "mL" }
+    ]
+  },
+  "AnyAction": [{
+    "AdvanceTime": {
+      "Time": {
+        "ScalarTime": {
+          "Value": 1.0,
+          "Unit": "min"
+        }
+      }
+    }
+  }, {
+    "PatientAction": {
+      "TensionPneumothorax": {
+        "PatientAction": {
+          "Action": {
+            "Comment": "Insult: Closed Tension Pneumothorax"
+          }
+        },
+        "Type": "Closed",
+        "Side": "Left",
+        "Severity": {
+          "Scalar0To1": {
+            "Value": 0.75
+          }
+        }
+      }
+    }
+  }, {
+    "PatientAction": {
+      "Hemorrhage": {
+        "PatientAction": {
+          "Action": {
+            "Comment": "Insult: Massive bleeding"
+          }
+        },
+        "Compartment": "RightLeg",
+        "FlowRate": {
+          "ScalarVolumePerTime": {
+            "Value": 100.0,
+            "Unit": "mL/min"
+          }
+        }
+      }
+    }
+  }, {
+    "PatientAction": {
+      "Hemorrhage": {
+        "PatientAction": {
+          "Action": {
+            "Comment": "Insult: Massive bleeding"
+          }
+        },
+        "Compartment": "VenaCava",
+        "FlowRate": {
+          "ScalarVolumePerTime": {
+            "Value": 250.0,
+            "Unit": "mL/min"
+          }
+        }
+      }
+    }
+  }, {
+    "AdvanceTime": {
+      "Time": {
+        "ScalarTime": {
+          "Value": 1.0,
+          "Unit": "min"
+        }
+      }
+    }
+  }, {
+    "PatientAction": {
+      "Hemorrhage": {
+        "PatientAction": {
+          "Action": {
+            "Comment": "Intervention: Bleeding reduced (manual pressure applied)"
+          }
+        },
+        "Compartment": "RightLeg",
+        "FlowRate": {
+          "ScalarVolumePerTime": {
+            "Value": 50.0,
+            "Unit": "mL/min"
+          }
+        }
+      }
+    }
+  }, {
+    "PatientAction": {
+      "Hemorrhage": {
+        "PatientAction": {
+          "Action": {
+            "Comment": "Intervention: Bleeding reduced (manual pressure applied)"
+          }
+        },
+        "Compartment": "VenaCava",
+        "FlowRate": {
+          "ScalarVolumePerTime": {
+            "Unit": "mL/min"
+          }
+        }
+      }
+    }
+  }, {
+    "AdvanceTime": {
+      "Time": {
+        "ScalarTime": {
+          "Value": 1.0,
+          "Unit": "min"
+        }
+      }
+    }
+  }, {
+    "PatientAction": {
+      "NeedleDecompression": {
+        "PatientAction": {
+          "Action": {
+            "Comment": "Intervention"
+          }
+        },
+        "State": "On",
+        "Side": "Left"
+      }
+    }
+  }, {
+    "AdvanceTime": {
+      "Time": {
+        "ScalarTime": {
+          "Value": 4.0,
+          "Unit": "min"
+        }
+      }
+    }
+  }, {
+    "PatientAction": {
+      "Hemorrhage": {
+        "PatientAction": {
+          "Action": {
+            "Comment": "Intervention: Bleeding stopped (tourniquet applied)"
+          }
+        },
+        "Compartment": "RightLeg",
+        "FlowRate": {
+          "ScalarVolumePerTime": {
+            "Unit": "mL/min"
+          }
+        }
+      }
+    }
+  }, {
+    "AdvanceTime": {
+      "Time": {
+        "ScalarTime": {
+          "Value": 0.5,
+          "Unit": "min"
+        }
+      }
+    }
+  }, {
+    "PatientAction": {
+      "SubstanceCompoundInfusion": {
+        "PatientAction": {
+          "Action": {
+            "Comment": "Intervention"
+          }
+        },
+        "SubstanceCompound": "Saline",
+        "BagVolume": {
+          "ScalarVolume": {
+            "Value": 500.0,
+            "Unit": "mL"
+          }
+        },
+        "Rate": {
+          "ScalarVolumePerTime": {
+            "Value": 100.0,
+            "Unit": "mL/min"
+          }
+        }
+      }
+    }
+  }, {
+    "AdvanceTime": {
+      "Time": {
+        "ScalarTime": {
+          "Value": 2.0,
+          "Unit": "min"
+        }
+      }
+    }
+  }, {
+    "PatientAction": {
+      "SubstanceBolus": {
+        "PatientAction": {
+          "Action": {
+            "Comment": "Intervention"
+          }
+        },
+        "Substance": "Morphine",
+        "Concentration": {
+          "ScalarMassPerVolume": {
+            "Value": 1000.0,
+            "Unit": "ug/mL"
+          }
+        },
+        "Dose": {
+          "ScalarVolume": {
+            "Value": 5.0,
+            "Unit": "mL"
+          }
+        }
+      }
+    }
+  }, {
+    "AdvanceTime": {
+      "Time": {
+        "ScalarTime": {
+          "Value": 12,
+          "Unit": "min"
+        }
+      }
+    }
+  }]
+}
